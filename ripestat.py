@@ -12,6 +12,8 @@ def rest_get(call,resource,retries=3):
 	url = "https://stat.ripe.net/data/{}/data.json?resource={}&sourceapp={}".format(call,resource,sourceapp)
 	try:
 		response = requests.get(url, timeout = 1)
+	except KeyboardInterrupt:
+		sys.exit()
 	except:
 		if retries > 0:
 			return rest_get(call,resource,retries-1)
